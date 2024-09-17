@@ -23,10 +23,11 @@ fun main() {
         val nom = input.toString()
 
         val color = partida.demanarColor()
-        val j = Jugador(nom)
+        val j = Jugador(nom,color)
+
         partida.afaixi_jugador(j)
     }
-    while ( partida.posisioMaxima() < 63) {
+    while ( partida.posisioMaxima() != 63) {
         partida.nextTirada();
     }
     partida.guanyador()
