@@ -1,6 +1,8 @@
 package com.dam.Jonathan.ap1.probas.Classes;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 
 import com.dam.Jonathan.ap1.probas.interficias.Resultat;
@@ -11,8 +13,14 @@ public class Partida implements Resultat {
     private Integer index = 0;
     private Random random = new Random();
     private Integer indexJugados = 0;
+    private static final Set<Integer> POSICIONES_OCA = new HashSet<>();
+
     private String[] listaColores = {"rojo","azul","amarillo","verde","negro","rosa"};
     public Partida() {
+        int[] posiciones = {5, 9, 14, 18, 23, 27, 30, 34, 39, 41, 45, 50, 54, 59};
+        for (int pos : posiciones) {
+            POSICIONES_OCA.add(pos);
+        }
     }
     public void afaixi_jugador(Jugador j) {
         listaJUgadores[index] = j;
@@ -96,21 +104,26 @@ public class Partida implements Resultat {
     public void nextTirada() {
        Jugador j = this.nextJugador();
        int t = tirada(j);
-       int p = actualitza(j,t);
-       boolean oca = posiblaOca(p);
-       while (oca){
-           System.out.println("oca torna a tira");
+       actualitza(j,t);
+       while (casellaespacial(j)){
            t = tirada(j);
-           p = actualitza(j,t);
-           oca = posiblaOca(p);
+           actualitza(j,t);
        }
+
     }
 
-    private boolean posiblaOca(int p) {
-        return p == 5 || p == 9 || p == 14 || p == 18 || p == 23 || p == 27 ||
-                p == 30 || p == 34 || p == 39 || p == 41 || p == 45 || p == 50 ||
-                p == 54 || p == 59;
+    private boolean casellaespacial(Jugador j) {
+        if (POSICIONES_OCA.contains(j.getPosisio())) {
+            oca(j);
+            return true;
+        }
+        return false;
     }
+    private void oca(Jugador j){
+        System.out.println("ta tocat la oca torna a tira");
+    }
+
+
 
     @Override
     public void guanyador() {
