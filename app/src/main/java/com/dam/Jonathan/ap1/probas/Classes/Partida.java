@@ -40,9 +40,6 @@ public class Partida implements Resultat {
                 I++;
             }
         }
-
-
-
         listaColores = nuevaListaColores;
     }
     public String demanarColor(){
@@ -114,13 +111,24 @@ public class Partida implements Resultat {
 
     private boolean casellaespacial(Jugador j) {
         if (POSICIONES_OCA.contains(j.getPosisio())) {
-            oca(j);
+            System.out.println("ta tocat la oca torna a tira");
             return true;
         }
+        if (j.getPosisio() == 6){
+            System.out.println("as caigut el pont et mous a la casella 12 i et torna a tocar tira");
+            j.setPosisio(12);
+            return true;
+        }
+        if (j.getPosisio() == 12){
+            System.out.println("as caigut el pont et mous a la casella 6 i et torna a tocar tira");
+            j.setPosisio(6);
+            return true;
+        }
+        if (j.getPosisio() == 58){
+            System.out.println("ups tas mort torna a la casilla 0");
+            j.setPosisio(0);
+        }
         return false;
-    }
-    private void oca(Jugador j){
-        System.out.println("ta tocat la oca torna a tira");
     }
 
 
