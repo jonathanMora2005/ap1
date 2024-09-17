@@ -1,7 +1,4 @@
 package com.dam.Jonathan.ap1.probas.Classes;
-
-import android.graphics.Color;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -70,9 +67,19 @@ public class Partida implements Resultat {
         return random.nextInt(6) + 1;
     }
     public int actualitza(Jugador j,int tirada){
+        int t = tirada;
         tirada += j.getPosisio();
         j.setPosisio(tirada);
-        System.out.println("la posisio del jugador " +j.getNom() + ":" + j.getPosisio() + "i a sortit un=" + tirada);
+        System.out.println("la posisio del jugador " +j.getNom() + ":" + j.getPosisio() + " i a sortit un=" + t);
+        if (j.getPosisio() > 63) {
+            System.out.println("ups tas pasat");
+           int p = j.getPosisio();
+           int difarencia = p - 63;
+           j.setPosisio(63- difarencia);
+            System.out.println("la posisio del jugador " +j.getNom() + ":" + j.getPosisio());
+
+
+        }
         return j.getPosisio();
     }
 
